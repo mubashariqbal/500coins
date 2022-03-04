@@ -63,10 +63,10 @@ class UpdateCoinPrices extends Command
                 $coin->save();
             }
     
+            sleep(1);
             $page = $page + 1;
             $url = "https://api.nomics.com/v1/currencies/ticker?key=".$api_key."&interval=1d&per-page=".$perPage."&page=".$page."&status=active";
             $json = Http::get($url)->throw()->json();
-            sleep(1);
         }
         
         return 0;
