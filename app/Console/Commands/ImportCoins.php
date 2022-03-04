@@ -42,6 +42,8 @@ class ImportCoins extends Command
         $api_key = config('services.nomics.key');
 
         $url = "https://api.nomics.com/v1/prices?key=".$api_key."&format=json";
+
+        dd($url);
         $json = Http::get($url)->json();
         
         foreach($json as $index => $coin) {

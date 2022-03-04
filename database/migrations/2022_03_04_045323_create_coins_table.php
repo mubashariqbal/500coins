@@ -41,6 +41,16 @@ class CreateCoinsTable extends Migration
             $table->unsignedDecimal('high', 40, 10)->nullable();
             $table->datetime('high_timestamp')->nullable();
 
+            $table->decimal('oneday_price_change', 40, 10)->nullable();
+            $table->decimal('oneday_price_change_pct', 40, 10)->nullable();
+            $table->unsignedDecimal('oneday_volume', 40, 10)->nullable();
+            $table->decimal('oneday_volume_change', 40, 10)->nullable();
+            $table->decimal('oneday_volume_change_pct', 40, 10)->nullable();
+            $table->decimal('oneday_market_cap_change', 40, 10)->nullable();
+            $table->decimal('oneday_market_cap_change_pct', 40, 10)->nullable();
+            $table->decimal('oneday_transparent_market_cap_change', 40, 10)->nullable();
+            $table->decimal('oneday_transparent_market_cap_change_pct', 40, 10)->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

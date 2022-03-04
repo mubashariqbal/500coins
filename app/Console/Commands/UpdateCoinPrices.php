@@ -43,35 +43,29 @@ class UpdateCoinPrices extends Command
 
         $perPage = 100;
         $page = 1;
-        $list = Coin::whereNull('rank')
-            ->orderBy('id', 'asc')->paginate($perPage, ['*'], $pageName = 'page', $page);
-        $pages = $list->lastPage();
-        print "\nPages: " . $pages;
+        $url = "https://api.nomics.com/v1/currencies/ticker?key=".$api_key."&interval=1d&per-page=".$perPage."&page=".$page."&status=active";
+        $json = Http::get($url)->throw()->json();
 
-        $offset = 0;
-        while($page <= $pages) {
+        while(sizeof($json)) {
             print "\nPage: " . $page;
-            $ids = [];
-            foreach($list as $coin) {
-                // print ".";
-                $ids[] = $coin->remote_id;
-            }
 
-            $url = "https://api.nomics.com/v1/currencies/ticker?key=".$api_key."&ids=".implode(',', $ids)."&interval=1d&per-page=100&page=1&status=active";
-            $json = Http::get($url)->throw()->json();
+            foreach($json as $c) {
+                $coin = Coin::firstOrCreate(['remote_id' => $c['id']]);
 
-            if ($json) {
-                foreach($json as $c) {
-                    $coin = Coin::firstOrCreate(['remote_id' => $c['id']]);
-                    $coin->fill($c);
-                    $coin->save();
+                // flatten the 
+                if (isset($c['1d'])) {
+                    foreach($c['1d'] as $key => $item) {
+                        $c['oneday_'.$key] = $item;
+                    }
                 }
-            } else {
-                print " NO DATA " . $page;
+
+                $coin->fill($c);
+                $coin->save();
             }
     
             $page = $page + 1;
-            $list = Coin::orderBy('id', 'asc')->paginate($perPage, ['*'], $pageName = 'page', $page);
+            $url = "https://api.nomics.com/v1/currencies/ticker?key=".$api_key."&interval=1d&per-page=".$perPage."&page=".$page."&status=active";
+            $json = Http::get($url)->throw()->json();
             sleep(1);
         }
         
