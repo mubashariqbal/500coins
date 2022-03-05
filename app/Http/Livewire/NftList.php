@@ -7,9 +7,8 @@ use Livewire\Component;
 
 class NftList extends Component
 {
-    public $sort = "rank";
+    public $sort = "market_cap";
     public $sorts = [
-        'rank'  => "Nomics Rank",
         'market_cap'  => "Market cap",
         'price'  => "Price",
         'volume'  => "One day volume",

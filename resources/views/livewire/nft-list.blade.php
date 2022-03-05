@@ -28,8 +28,25 @@
         </div>
     </div>
     <div class="my-4">
-        <ul class="grid grid-cols-5 md:grid-cols-10 gap-4">
+        <ul class="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-10 gap-4">
             @foreach ($coins as $index => $coin)
+                @php 
+                    $lgflip = false;
+                    $mdflip = false;
+                    $flip = false;
+                    if ($index > 0) {
+                        $pos = $index + 1;
+                        if ($pos % 10 == 0) {
+                            $lgflip = true;
+                        }
+                        if ($pos % 8 == 0) {
+                            $mdflip = true;
+                        }
+                        if ($pos % 4 == 0) {
+                            $flip = true;
+                        }
+                    }
+                @endphp
                 <li class="group p-4 bg-white rounded-lg border shadow-sm flex items-center justify-center relative h-full">
                     <div class="h-full flex-col text-center">
                         <div class=" grow h-full">
@@ -37,15 +54,21 @@
                         </div>
                     </div>
                     <div class="absolute flex-shrink-0 top-0 left-0 text-xs bg-white rounded-lg p-1">{{ $index+1 }}</div>
-                    <div class="opacity-0 group-hover:opacity-75 absolute rounded-lg h-full top-0 left-0 w-full bg-black z-100">
+                    <div class="invisible group-hover:visible absolute opacity-75 rounded-lg h-56 md:h-72 w-48 
+                        top-0 left-0 {{ $lgflip ? 'lg:-ml-20' : '' }} {{ $mdflip ? 'md:-ml-24' : '' }} {{ $flip ? '-ml-24' : '' }}
+                        bg-black z-10">
                         <a class="block rounded-lg h-full w-full" href="https://nomics.com/assets/{{ $coin->symbol }}">
                         <div class="p-4">
                             <div class="text-white text-sm">{{ $coin->name }}</div>
-                            <div class="mt-2 text-white text-sm">Last</div>
+                            <div class="mt-2 text-white text-xs">Last</div>
                             <div class="text-white text-sm">{{ '$'.number_format($coin->price, 2) }}</div>
 
-                            <div class="mt-2 text-white text-sm">Market cap</div>
+                            <div class="mt-2 text-white text-xs">Market cap</div>
                             <div class="text-white text-sm">{{ '$'.capFormat($coin->market_cap) }}</div>
+
+                            <div class="mt-2 text-white text-xs">One day volume</div>
+                            <div class="text-white text-sm">{{ '$'.capFormat($coin->oneday_volume) }}</div>
+
                         </div>
                         </a>
                     </div>

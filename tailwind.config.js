@@ -12,6 +12,7 @@ module.exports = {
     theme: {
         extend: {
             display: ["group-hover"],
+            visibility: ["group-hover"],
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
