@@ -27,6 +27,7 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        <footer class="mt-6 text-center text-sm text-gray-700">Data provided by <a target="_blank" class="hover:underline" href="https://nomics.com/">Nomics</a></footer>
 
         @livewireScripts
     </body>
