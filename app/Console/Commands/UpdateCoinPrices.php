@@ -45,6 +45,7 @@ class UpdateCoinPrices extends Command
         $page = 1;
         $url = "https://api.nomics.com/v1/currencies/ticker?key=".$api_key."&interval=1d&per-page=".$perPage."&page=".$page."&status=active";
         $json = Http::get($url)->throw()->json();
+        $maxPages = 10;
 
         while(sizeof($json)) {
             print "\nPage: " . $page;
@@ -63,6 +64,10 @@ class UpdateCoinPrices extends Command
                 $coin->save();
             }
     
+            if ($page >= $maxPages) {
+                break;
+            }
+
             sleep(1);
             $page = $page + 1;
             $url = "https://api.nomics.com/v1/currencies/ticker?key=".$api_key."&interval=1d&per-page=".$perPage."&page=".$page."&status=active";
