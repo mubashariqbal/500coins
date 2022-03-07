@@ -16,6 +16,20 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         @livewireStyles
+
+        @env('production')
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-51PMCTKJ6F"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-51PMCTKJ6F');
+        </script>
+        @else 
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        @endenv
     </head>
     <body class="bg-gray-100">
 
