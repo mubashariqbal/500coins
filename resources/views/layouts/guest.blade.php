@@ -35,7 +35,7 @@
 
         <header class="max-w-7xl mx-auto flex items-center justify-between py-6">
             <h1>
-                <img class="h-10" src="/img/logo.svg" alt="">
+                <img class="h-6" src="/img/logo.svg" alt="">
             </h1>
             <div class="text-gray-600 text-sm">
                 Data provided by <a target="_blank" class="hover:underline" href="https://nomics.com/">Nomics</a>
