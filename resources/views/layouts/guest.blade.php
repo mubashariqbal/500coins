@@ -33,15 +33,20 @@
     </head>
     <body class="bg-gray-100">
 
-        <header class="max-w-7xl mx-auto flex justify-center py-10">
+        <header class="max-w-7xl mx-auto flex items-center justify-between py-6">
             <h1>
-                <img class="h-20" src="/img/logo.svg" alt="">
+                <img class="h-10" src="/img/logo.svg" alt="">
             </h1>
+            <div class="text-gray-600 text-sm">
+                Data provided by <a target="_blank" class="hover:underline" href="https://nomics.com/">Nomics</a>
+            </div>
         </header>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
-        <footer class="mt-6 text-center text-sm text-gray-700">Data provided by <a target="_blank" class="hover:underline" href="https://nomics.com/">Nomics</a></footer>
+        <footer class="mt-6 text-center text-sm text-gray-700">
+            Built by <a class="hover:underline" href="https://twitter.com/mubashariqbal">@mubashariqbal</a>
+        </footer>
 
         @livewireScripts
     </body>
